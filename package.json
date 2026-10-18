@@ -1,0 +1,25 @@
+{
+  "name": "nodeoct26",
+  "version": "1.0.0",
+  "description": "node js app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app",
+    "dev": "node --watch src/app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avimalhotra/nodeoct26.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avimalhotra/nodeoct26/issues"
+  },
+  "homepage": "https://github.com/avimalhotra/nodeoct26#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
