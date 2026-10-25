@@ -19,7 +19,7 @@
     "url": "https://github.com/avimalhotra/nodeoct26/issues"
   },
   "homepage": "https://github.com/avimalhotra/nodeoct26#readme",
-  "dependencies": {
-    "colors": "^1.4.0"
+  "devDependencies": {
+    "@types/node": "^26.6.5"
   }
 }

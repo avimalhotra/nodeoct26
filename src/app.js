@@ -1,85 +1,65 @@
-import os from "node:os";                                        // from nodejs
+import http from "node:http";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
-import EventEmitter from "node:events";
-const emitter=new EventEmitter();
+import cluster from "node:cluster";
 
-console.log("Hello NodeJS");
-console.log( process.version );
+const port=80;
 
-// const data=fs.readFileSync("src/data.txt",{encoding:'utf-8'});
-// console.log(data);
+// if(cluster.isPrimary){
+//      const totalCPUs = os.cpus().length;
+//      console.log(`Master running... CPU Cores: ${totalCPUs}`);
+     
+//      // Create workers
+//      for( let i=0; i<totalCPUs; i++){
+//           cluster.fork()
+//      };
 
-// fs.readFile(path.resolve("src/data.txt"),{encoding:"utf-8"},(err,data)=>{
-//      if(err){ console.warn(err)}
-//      else{ console.log(data) }
-// });
+//      // Restart worker if it crashes
+//   cluster.on("exit", (worker) => {
+//     console.log(`Worker ${worker.process.pid} died. Restarting...`);
+//     cluster.fork();
+//   });
+// }
+// else{
+//      const server=http.createServer((req,res)=>{
+//           res.end(`Handled by worker ${process.pid}`);
+//      });
 
-// fs.stat("src/data.txt",{encoding:"utf-8"},(err,stat)=>{
-//      if(err){ console.warn(err)}
-//      else{ console.log(stat.size) }
-// });
-
-// fs.writeFile("src/data.txt","Hello FS 🤔",{encoding:"utf-8"},(err)=>{
-//      if(err){ console.warn(err)}
-//      else{ console.log("file updated ") }
-// });
-
-// fs.appendFile("src/data.txt",`Hello There, ${new Date().toLocaleString()} \n`,{encoding:"utf-8"},(err)=>{
-//       if(err){ console.warn(err)}
-//      else{ console.log("file updated") }
-// });
-
-//  fs.unlink('src/demo.txt',(err)=>{
-//        if(err){
-//            console.log('Error:', err);
-//        }
-//        else{
-//           console.log('file deleted successfully'); 
-//        }        
-// });
+//      server.listen(port,()=>console.log(`Server running at http://127.0.0.1:${port}`))
+// }
 
 
-// console.log( path.normalize("./src/app") );
-// console.log( path.normalize("src//app") );
-// console.log( path.normalize("src/app/../") );
+const server=http.createServer((req,res)=>{
+     // res.statusCode=200;
+     // res.setHeader('Content-Type','text/html');
+     res.writeHead(200,{"content-type":"text/html","accept-encoding":"utf-8"});
+     res.write("<h1>Hello Node JS</h1>");
 
-// console.log( path.basename("src/app") );
-// console.log( path.basename("src/app.html",".html") );
+     // res.write(`<p>${req.url}</p>`);
+     // res.write(`<p>${req.method}</p>`);
+     // res.write(`<p>${req.headers.host}</p>`);
 
-// console.log( path.resolve("src/data.txt") );
-// console.log( path.resolve("src","app") );
+     // if(req.url=="/" && req.method=="GET"){
+     //      fs.readFile(path.resolve("src/home.html"),(err,data)=>{
+     //           if(err){
+     //                res.writeHead(404,{"content-type":"text/html","accept-encoding":"utf-8"});
+     //                res.write("<h1>Error</h1>");
+     //           }
+     //           else{
+     //                res.writeHead(200,{"content-type":"text/html","accept-encoding":"utf-8"});
+     //                res.write(data);
+     //           }
+     //           res.end();
+     //      });
+     // }
+     // else{
+     //      res.end(`<p>URL not Found</p>`);
+     // }
 
-// console.log( path.join("src","./app") );
-
-// fs.ReadStream("src/data.txt").on("open",()=>{
-//      console.log("file open");
-// });
-
-// register
-// emitter.on("done",(user)=>{
-//      console.log(`done event occured once by ${user}`);
-// });
-// emitter.on("done",(user)=>{
-//      console.log(`done event occured twice by ${user}`);
-// });
-
-// emitter.on("single",(x)=>{
-//      console.log(x)
-//      // x.done=true;
-// });
-// emitter.on("single",(x)=>{
-//     if(x.done){ console.log(x) }
-// });
-
-emitter.once("single",()=>{
-     console.log(`Single Event`)
+      res.end();
 });
 
-// emit or trigger
-// emitter.emit("done","Avi");
-// emitter.emit("done","Isha");
-
-// emitter.emit("single");
-
-// console.log("done");
+server.listen(port,()=>{
+     console.log(`Server running at http://127.0.0.1:${port}`);
+});
