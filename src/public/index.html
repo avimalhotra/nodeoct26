@@ -13,7 +13,7 @@
           <!-- <img src="img/bat.svg" alt="batman" width="300" height="120"> -->
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi ab consequatur repellat fugit, voluptate nesciunt. Atque, quis officiis quod reprehenderit blanditiis vitae nulla delectus doloremque cupiditate perspiciatis accusantium molestias veritatis.</p>
 
-          <h2>HTTP GET</h2>
+          <!-- <h2>HTTP GET</h2>
           <form class="row g-3 align-items-center" method="get" action="/search">
                <div class="col-auto">
                     <label for="query" class="form-label">Search</label>
@@ -30,8 +30,8 @@
                <div class="col-auto">
                     <button type="submit" class="btn btn-primary">Search</button>
                </div>
-          </form>
-          <hr>
+          </form> -->
+          <!-- <hr>
           <h2>HTTP Post</h2>
           <form method="post" action="/login">
                <div class="mb-3">
@@ -49,24 +49,43 @@
                </div>
                <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <hr>
-          <h2>API</h2>
+          <hr> -->
+          <!-- <h2>API</h2>
           <ol>
 
-          </ol>
+          </ol> -->
+
+          <hr>
+
+          <h2>Upload</h2>
+          
+          <form action="/upload" method="post" enctype="multipart/form-data" class="row align-items-center">
+
+               <div class="col-auto">
+                    <label for="resume">Resume:</label>
+               </div>
+               <div class="col-auto">
+                     <input class="form-control" type="file" name="resume" required accept=".pdf,.doc,.docx" id="resume">
+               </div>
+               <div class="col-auto">
+                    <button class="btn btn-primary">Upload</button>
+               </div>
+
+          </form>
+
      </div>
 <script>
      "use strict";
 
-     async function fetchCars(){
-          const x=await fetch("api/cars");
-          const y=await x.json();
-          y.forEach(element => {
-               document.querySelector("ol").innerHTML+=`<li>${element.name}</li>`
-          });
-     }
+     // async function fetchCars(){
+     //      const x=await fetch("api/cars");
+     //      const y=await x.json();
+     //      y.forEach(element => {
+     //           document.querySelector("ol").innerHTML+=`<li>${element.name}</li>`
+     //      });
+     // }
 
-     fetchCars();
+     // fetchCars();
 
 </script>     
 </body>

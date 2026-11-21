@@ -3,14 +3,29 @@ import path from "node:path";
 import cookieParser from "cookie-parser";
 import session from "express-session";
 import cors from "cors";
+import multer from "multer";
 
 import products from "./routes/products.js";
 import courses from "./routes/courses.js";
 import api from "./routes/api.js";
 
-const port=3000;
+
+const port=process.env.PORT || 8080;
 
 const app=express();
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'src/public/uploads/')
+    },
+    filename: function (req, file, cb) {
+     //  cb(null, file.originalname);          // for original name 
+     cb(null, Date.now() + path.extname(file.originalname)) ;
+    }
+  });
+
+const upload=multer({storage:storage});
+// const upload=multer({dest:"src/public/uploads"});
 
 // Built-in middleware for parsing JSON
 app.use(express.json());
@@ -37,6 +52,8 @@ app.use(cors({origin:"*"}));
 //      console.log(`Path : ${req.url}, Time: ${Date.now()}`);
 //      next();
 // });
+
+
 
 function isAuthenticated(req,res,next){
       if(new Date().getHours()>=12){ 
@@ -99,7 +116,17 @@ app.get("/contact.php",(req,res)=>{
 
 app.get("/admin",isAuthenticated,(req,res)=>{
       res.status(200).send("Hello Admin");
-})
+});
+
+app.post("/upload",upload.single("resume"),(req,res)=>{
+     res.status(200).send("File Uploaded");
+});
+
+// app.post("/upload",upload.array("resume",3),(req,res)=>{
+//      res.status(200).send("Files Uploaded");
+// });
+
+
 
 app.get("/*splat",(req,res)=>{
      res.status(404).send(`404, Page not found, Go to <a href="/">Homepage</a>`);
